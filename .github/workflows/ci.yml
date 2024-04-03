@@ -1,0 +1,26 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - uses: nrwl/nx-set-shas@v3
+      - name: Install project dependencies
+        run: yarn
+
+      - run: yarn build
