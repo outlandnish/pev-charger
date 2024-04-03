@@ -1,0 +1,15 @@
+{
+  "name": "pev-charger",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:outlandnish/pev-charger.git",
+  "author": "Nishanth Samala <hey@outlandnish.com>",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "api",
+    "charger",
+    "simulator"
+  ]
+}
