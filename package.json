@@ -1,5 +1,5 @@
 {
-  "name": "pev-charger",
+  "name": "@charger/pev-charger",
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
@@ -11,5 +11,8 @@
     "api",
     "charger",
     "simulator"
-  ]
+  ],
+  "scripts": {
+    "build": "yarn workspace @charger/api build"
+  }
 }
