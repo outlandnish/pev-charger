@@ -23,4 +23,5 @@ jobs:
       - name: Install project dependencies
         run: yarn
 
+      - run: cp .env.example .env
       - run: yarn ci
