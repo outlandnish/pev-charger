@@ -130,3 +130,7 @@ dist
 .pnp.*
 
 api/dist
+
+coverage
+jest.config.js
+dist
