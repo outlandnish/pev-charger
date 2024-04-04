@@ -31,6 +31,6 @@
     "build": "yarn run lint && npx tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "test": "jest"
+    "test": "yarn run jest"
   }
 }
