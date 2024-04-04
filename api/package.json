@@ -26,9 +26,10 @@
     "zod": "^3.22.4"
   },
   "scripts": {
+    "ci": "yarn run lint && yarn run build && yarn run test",
     "lint": "eslint . --ext .ts && prettier --check .",
     "lint:fix": "eslint . --ext .ts --fix && prettier . --write",
-    "build": "yarn run lint && npx tsc",
+    "build": "npx tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "yarn run jest"

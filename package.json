@@ -16,6 +16,7 @@
     "build": "yarn workspace @charger/api build",
     "test": "yarn workspace @charger/api test",
     "lint": "yarn workspace @charger/api lint",
-    "lint:fix": "yarn workspace @charger/api lint:fix"
+    "lint:fix": "yarn workspace @charger/api lint:fix",
+    "ci": "yarn workspace @charger/api ci"
   }
 }
