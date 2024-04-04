@@ -1,11 +1,9 @@
 import request from 'supertest'
 import app from '../src/index'
 
-// let server
+import {jest} from '@jest/globals'
 
-// beforeAll(() => {
-//   server = app.listen(3000)
-// })
+jest.useFakeTimers()
 
 describe('Test session.ts', () => {
   test('Start session route', async () => {
@@ -36,8 +34,3 @@ describe('Test session.ts', () => {
     })
   })
 })
-
-// afterAll(done => {
-//   server.close()
-//   done()
-// })

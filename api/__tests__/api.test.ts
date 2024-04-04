@@ -1,6 +1,10 @@
 import request from 'supertest'
 import app from '../src/index'
 
+import {jest} from '@jest/globals'
+
+jest.useFakeTimers()
+
 describe('Test app.ts', () => {
   test('Charger info route', async () => {
     const expectedCharger = {
