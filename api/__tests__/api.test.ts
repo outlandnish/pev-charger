@@ -1,7 +1,7 @@
 import request from 'supertest'
 import app from '../src/index'
 
-import {jest} from '@jest/globals'
+import { jest } from '@jest/globals'
 
 jest.useFakeTimers()
 
