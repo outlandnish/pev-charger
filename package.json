@@ -13,6 +13,7 @@
     "simulator"
   ],
   "scripts": {
-    "build": "yarn workspace @charger/api build"
+    "build": "yarn workspace @charger/api build",
+    "test": "yarn workspace @charger/api test"
   }
 }
