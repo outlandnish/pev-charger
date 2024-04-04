@@ -10,7 +10,8 @@
   "workspaces": [
     "api",
     "charger",
-    "simulator"
+    "simulator",
+    "common"
   ],
   "scripts": {
     "build": "yarn workspace @charger/api build",

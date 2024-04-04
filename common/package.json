@@ -1,0 +1,10 @@
+{
+  "name": "@charger/common",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}

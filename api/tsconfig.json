@@ -4,6 +4,10 @@
     "transpileOnly": true,
     "files": true
   },
+  "include": [
+    "./src/**/*.ts",
+    "../common/**/*.ts",
+  ],
   "compilerOptions": {
     "isolatedModules": true,
     "target": "ES2022",

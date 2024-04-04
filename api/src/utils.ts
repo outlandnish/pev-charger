@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { AnyZodObject } from 'zod'
-import { ChargerPort } from './types.js'
+import { ChargerPort } from '@charger/common'
 
 export const validate =
   (schema: AnyZodObject) =>

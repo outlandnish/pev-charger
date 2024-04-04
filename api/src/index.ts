@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import session from './session.js'
 import { charger } from './charger.js'
@@ -6,7 +7,10 @@ import { charger } from './charger.js'
 dotenv.config()
 
 const app: Express = express()
+
+// common middleware
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (_req: Request, res: Response) => {
   res.json(charger)

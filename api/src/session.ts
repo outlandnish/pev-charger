@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { StartSessionRequest, StopSessionRequest } from './types.js'
+import { StartSessionRequest, StopSessionRequest } from '@charger/common'
 import { findPort, validate } from './utils.js'
 import { charger } from './charger.js'
 
