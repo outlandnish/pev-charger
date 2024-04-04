@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
-import session from './session'
-import { charger } from './charger'
+import session from './session.js'
+import { charger } from './charger.js'
 
 dotenv.config()
 

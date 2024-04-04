@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@types/express": "^4.17.21",

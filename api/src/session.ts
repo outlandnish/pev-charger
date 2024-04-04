@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
-import { StartSessionRequest, StopSessionRequest } from './types'
-import { findPort, validate } from './utils'
-import { charger } from './charger'
+import { StartSessionRequest, StopSessionRequest } from './types.js'
+import { findPort, validate } from './utils.js'
+import { charger } from './charger.js'
 
 const router = express.Router()
 

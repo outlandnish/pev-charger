@@ -1,4 +1,4 @@
-import { Charger } from './types'
+import { Charger } from './types.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
