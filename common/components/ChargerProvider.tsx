@@ -29,7 +29,7 @@ export const ChargerProvider: FC<PropsWithChildren> = ({ children }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(vehicle),
+      body: JSON.stringify({ vehicle: vehicle }),
     })
   }
 
@@ -57,7 +57,7 @@ export const ChargerProvider: FC<PropsWithChildren> = ({ children }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ state }),
+      body: JSON.stringify({ chargeState: state }),
     })
   }
 

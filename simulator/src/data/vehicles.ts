@@ -38,7 +38,7 @@ export const vehicles: Vehicle[] = [
     batteryType: 'lithium-ion'
   },
   {
-    id: 'c3d67962-3ff6-4ce8-b02b-3c440ab8a57f',
+    id: 'aa1396b9-e83f-4c53-a4ed-3ae6026b9091',
     name: 'Onewheel GTS',
     type: 'onewheel',
     supportedChargeCurrent: [5],
