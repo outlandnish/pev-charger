@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { ChargeState, Charger, Vehicle } from '@charger/common'
 import { ChargeContext } from './ChargerContext'
 
