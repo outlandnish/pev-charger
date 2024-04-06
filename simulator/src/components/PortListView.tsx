@@ -25,13 +25,21 @@ export const PortListView: FC<Props> = ({ port, index }) => {
         <select onChange={onVehicleSelected}>
           <option value="">Select a vehicle</option>
           {vehicles.map((vehicle) => (
-            <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>
+            <option key={vehicle.id} value={vehicle.id}>
+              {vehicle.name}
+            </option>
           ))}
         </select>
       )}
-      {port.available && selectedVehicle && <button onClick={() => connect(port.id, selectedVehicle)}>Connect</button>}
+      {port.available && selectedVehicle && (
+        <button onClick={() => connect(port.id, selectedVehicle)}>
+          Connect
+        </button>
+      )}
       {port.vehicle && <p>Connected - {port.vehicle.name}</p>}
-      {port.vehicle && <button onClick={() => disconnect(port.id)}>Disconnect</button>}
+      {port.vehicle && (
+        <button onClick={() => disconnect(port.id)}>Disconnect</button>
+      )}
     </div>
   )
 }

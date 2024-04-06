@@ -26,6 +26,6 @@ export const ChargerView = () => {
           </li>
         ))}
       </ul>
-    </div >
+    </div>
   )
 }
