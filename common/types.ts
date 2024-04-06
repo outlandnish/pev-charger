@@ -24,6 +24,9 @@ export const SupportedChargeRate = z.object({
 export const VehicleType = z.enum(['e-bike', 'e-skate', 'scooter', 'onewheel', 'euc', 'motorcycle', 'other'])
 export type VehicleType = z.infer<typeof VehicleType>
 
+export const BatteryType = z.enum(['lithium-ion', 'lithium-polymer', 'lithium-iron-phosphate', 'nickel-cadmium', 'nickel-metal-hydride', 'lead-acid', 'other'])
+export type BatteryType = z.infer<typeof BatteryType>
+
 export const Vehicle = z.object({
   id: z.string().uuid(),
   name: z.string(),
@@ -34,6 +37,7 @@ export const Vehicle = z.object({
   supportedBalanceCurrent: z.array(z.number()),
   stateOfCharge: z.number(),
   chargeState: ChargeState,
+  batteryType: BatteryType
 })
 export type Vehicle = z.infer<typeof Vehicle>
 
@@ -55,6 +59,17 @@ export const DisconnectRequest = z.object({
   })
 })
 
+export const UpdateChargeStateRequest = z.object({
+  params: z.object({
+    portId: z.string().uuid(),
+  }),
+  body: z.object({
+    chargeState: ChargeState
+  })
+})
+
+export const ChargeSessionFault = z.enum(['unavailable', 'overcurrent', 'overvoltage', 'overtemperature', 'undervoltage', 'undertemperature', 'other'])
+
 export const ChargeSession = z.object({
   id: z.string().uuid(),
   chargerId: z.string().uuid(),
@@ -64,7 +79,9 @@ export const ChargeSession = z.object({
   endTime: z.date().optional(),
   energyDelivered: z.number(),
   endReason: SessionEndReason.optional(),
-  chargeState: ChargeState.default('idle')
+  chargeState: ChargeState.default('idle'),
+  powerRate: z.number().optional(),
+  fault: ChargeSessionFault.optional()
 })
 export type ChargeSession = z.infer<typeof ChargeSession>
 
@@ -79,7 +96,8 @@ const Charger = z.object({
   name: z.string().uuid(),
   id: z.string(),
   capacity: z.number(),
-  ports: z.array(ChargerPort)
+  ports: z.array(ChargerPort),
+  availableCapacity: z.number()
 })
 
 export type ChargerPort = z.infer<typeof ChargerPort>

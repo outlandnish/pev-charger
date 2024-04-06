@@ -14,7 +14,8 @@ const onewheelPint: Vehicle = {
   stateOfCharge: 50,
   chargeState: 'charge',
   capacity: 144,
-  voltage: 63
+  voltage: 63,
+  batteryType: 'lithium-ion'
 }
 
 describe('Session API', () => {
@@ -41,6 +42,34 @@ describe('Session API', () => {
     expect(startRes.status).toBe(200)
     expect(startRes.body.session).toBeDefined()
     expect(startRes.body.session.chargeState).toBe('idle')
+  })
+
+  test('Start charging', async () => {
+    const res = await request(app)
+      .post('/session/c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd/state')
+      .send({ chargeState: 'charge' })
+
+    expect(res.status).toBe(200)
+    expect(res.body.session.chargeState).toBe('charge')
+
+    const chargerRes = await request(app).get('/')
+
+    expect(chargerRes.status).toBe(200)
+    expect(chargerRes.body.availableCapacity).toBe(2400 - 3 * 63)
+  })
+
+  test('Start balancing', async () => {
+    const res = await request(app)
+      .post('/session/c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd/state')
+      .send({ chargeState: 'balance' })
+
+    expect(res.status).toBe(200)
+    expect(res.body.session.chargeState).toBe('balance')
+
+    const chargerRes = await request(app).get('/')
+
+    expect(chargerRes.status).toBe(200)
+    expect(chargerRes.body.availableCapacity).toBe(2400 - 0.5 * 63)
   })
 
   test('Stop session', async () => {

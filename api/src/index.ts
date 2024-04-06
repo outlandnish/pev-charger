@@ -3,11 +3,13 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import session from './session.js'
 import ports from './ports.js'
-import { charger } from './charger.js'
+import { charger, updateChargeSessions } from './charger.js'
 
 dotenv.config()
 
 const app: Express = express()
+
+updateChargeSessions()
 
 // common middleware
 app.use(express.json())

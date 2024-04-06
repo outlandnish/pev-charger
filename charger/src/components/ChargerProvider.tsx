@@ -17,10 +17,16 @@ export const ChargerProvider: FC<PropsWithChildren> = ({ children }) => {
     loadCharger()
   }, [])
 
+  const refresh = async () => {
+    const response = await fetch(`${CHARGER_URL}/`)
+    const charger = await response.json()
+    setCharger(charger)
+  }
+
   if (!charger) return <div>Loading...</div>
 
   return (
-    <ChargeContext.Provider value={{ charger }}>
+    <ChargeContext.Provider value={{ charger, refresh }}>
       {children}
     </ChargeContext.Provider>
   )
