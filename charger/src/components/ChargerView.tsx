@@ -10,7 +10,7 @@ export const ChargerView = () => {
 
   return (
     <>
-      <h1>{charger.name}</h1>
+      <h1 className="text-3xl font-bold underline">{charger.name}</h1>
       <p>
         {charger.availableCapacity} / {charger.capacity} watts
       </p>

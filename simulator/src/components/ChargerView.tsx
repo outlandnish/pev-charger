@@ -10,13 +10,17 @@ export const ChargerView = () => {
 
   return (
     <>
-      <h1>{charger.name}</h1>
+      <h1 className="text-3xl font-bold underline">{charger.name}</h1>
       <p>
         {charger.availableCapacity} / {charger.capacity} watts
       </p>
       <ul>
         {charger.ports.map((port) => (
-          <li key={port.id}>{port.available ? 'Available' : 'Occupied'}</li>
+          <li key={port.id}>
+            <div>
+              
+            </div>
+          </li>
         ))}
       </ul>
     </>

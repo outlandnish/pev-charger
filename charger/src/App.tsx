@@ -1,4 +1,4 @@
-import { ChargerProvider } from './components/ChargerProvider'
+import { ChargerProvider } from '@charger/common'
 import { ChargerView } from './components/ChargerView'
 
 function App() {
