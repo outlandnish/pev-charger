@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 
-export const ChargeState = z.enum(['idle', 'discharging', 'preheat', 'charge', 'balance', 'complete'])
+export const ChargeState = z.enum(['idle', 'preheat', 'charge', 'balance', 'complete'])
 export type ChargeState = z.infer<typeof ChargeState>
 
 export const StartSessionRequest = z.object({
