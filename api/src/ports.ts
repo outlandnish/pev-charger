@@ -9,9 +9,10 @@ router.get('', (_req: Request, res: Response) => {
   res.json(charger.ports)
 })
 
-router.post('/:portId/connect',
-  validate(ConnectRequest), 
-  findPort(charger.ports), 
+router.post(
+  '/:portId/connect',
+  validate(ConnectRequest),
+  findPort(charger.ports),
   (req: Request, res: Response) => {
     const { port } = req
     if (!port) return
@@ -26,7 +27,8 @@ router.post('/:portId/connect',
   }
 )
 
-router.post('/:portId/disconnect',
+router.post(
+  '/:portId/disconnect',
   validate(DisconnectRequest),
   findPort(charger.ports),
   (req: Request, res: Response) => {
@@ -37,7 +39,10 @@ router.post('/:portId/disconnect',
       return res.status(400).json({ error: 'Port is already available' })
     else {
       if (port.chargeSession)
-        return res.status(400).json({ error: 'Charge session in progress. Please end the session before disconnecting' })
+        return res.status(400).json({
+          error:
+            'Charge session in progress. Please end the session before disconnecting'
+        })
 
       port.available = true
       port.vehicle = undefined

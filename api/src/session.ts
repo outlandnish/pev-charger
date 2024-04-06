@@ -1,5 +1,9 @@
 import express, { Request, Response } from 'express'
-import { ChargeSession, StartSessionRequest, StopSessionRequest } from '@charger/common'
+import {
+  ChargeSession,
+  StartSessionRequest,
+  StopSessionRequest
+} from '@charger/common'
 import { findPort, validate } from './utils.js'
 import { charger } from './charger.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -25,7 +29,7 @@ router.post(
         portId: port.id,
         vehicle: port.vehicle,
         startTime: new Date(),
-        chargeState: 'idle',
+        chargeState: 'idle'
       }
 
       return res.json({ session: port.chargeSession })
@@ -54,7 +58,8 @@ router.post(
   }
 )
 
-router.post('/:portId/state',
+router.post(
+  '/:portId/state',
   findPort(charger.ports),
   (req: Request, res: Response) => {
     const { port } = req
@@ -65,11 +70,9 @@ router.post('/:portId/state',
   }
 )
 
-router.get("/", 
-  (_req: Request, res: Response) => {
-    res.json(sessions)
-  }
-)
+router.get('/', (_req: Request, res: Response) => {
+  res.json(sessions)
+})
 
 export default {
   router

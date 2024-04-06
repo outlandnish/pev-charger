@@ -9,7 +9,7 @@ const onewheelPint: Vehicle = {
   id: '12345678-890a-bcde-f012-34567890abcd',
   name: 'Onewheel Pint',
   type: 'onewheel',
-  supportedChargeCurrent: [1,2,3],
+  supportedChargeCurrent: [1, 2, 3],
   supportedBalanceCurrent: [0.5],
   stateOfCharge: 50,
   chargeState: 'charge',
@@ -22,9 +22,9 @@ describe('Port api', () => {
     const res = await request(app)
       .post('/ports/c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd/connect')
       .send({ vehicle: onewheelPint })
-    
+
     expect(res.status).toBe(200)
-    
+
     const result = await ChargerPort.parseAsync(res.body.port)
     expect(result.available).toBe(false)
     expect(result.vehicle).not.toBeUndefined()
@@ -34,7 +34,7 @@ describe('Port api', () => {
     const res = await request(app)
       .post('/ports/c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd/disconnect')
       .send()
-    
+
     expect(res.status).toBe(200)
 
     const result = await ChargerPort.parseAsync(res.body.port)
