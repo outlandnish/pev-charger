@@ -6,7 +6,7 @@ export const ChargerView = () => {
   const { charger, refresh: refreshCharger } = useCharger()
 
   useEffect(() => {
-    const interval = setInterval(() => refreshCharger(), 500)
+    const interval = setInterval(() => refreshCharger(), 1000)
 
     return () => {
       clearInterval(interval)

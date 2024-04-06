@@ -1,12 +1,17 @@
 import { useEffect } from 'react'
 import { useCharger } from '@charger/common'
+import { PortListView } from './PortListView'
 
 export const ChargerView = () => {
   const { charger, refresh: refreshCharger } = useCharger()
 
   useEffect(() => {
-    setInterval(() => refreshCharger(), 500)
-  })
+    const interval = setInterval(() => refreshCharger(), 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [refreshCharger])
 
   return (
     <>
@@ -15,8 +20,10 @@ export const ChargerView = () => {
         {charger.availableCapacity} / {charger.capacity} watts
       </p>
       <ul>
-        {charger.ports.map((port) => (
-          <li key={port.id}>{port.available ? 'Available' : 'Occupied'}</li>
+        {charger.ports.map((port, index) => (
+          <li key={port.id}>
+            <PortListView port={port} index={index} />
+          </li>
         ))}
       </ul>
     </>

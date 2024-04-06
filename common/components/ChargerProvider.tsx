@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { ChargeState, Charger, Vehicle } from '@charger/common'
 import { ChargeContext } from './ChargerContext'
 
@@ -17,13 +17,13 @@ export const ChargerProvider: FC<PropsWithChildren> = ({ children }) => {
     loadCharger()
   }, [])
 
-  const refresh = async () => {
+  const refresh = useMemo(() => async () => {
     const response = await fetch(`${CHARGER_URL}/`)
     const charger = await response.json()
     setCharger(charger)
-  }
+  }, [])
 
-  const connect = async (portId: string, vehicle: Vehicle) => {
+  const connect = useMemo(() => async (portId: string, vehicle: Vehicle) => {
     await fetch(`${CHARGER_URL}/ports/${portId}/connect`, {
       method: 'POST',
       headers: {
@@ -31,35 +31,36 @@ export const ChargerProvider: FC<PropsWithChildren> = ({ children }) => {
       },
       body: JSON.stringify({ vehicle: vehicle }),
     })
-  }
+  }, [])
 
-  const disconnect = async (portId: string) => {
+  const disconnect = useMemo(() => async (portId: string) => {
     await fetch(`${CHARGER_URL}/ports/${portId}/disconnect`, {
       method: 'POST',
     })
-  }
+  }, [])
 
-  const startSession = async (portId: string) => {
-    await fetch(`${CHARGER_URL}/ports/${portId}/start`, {
+  const startSession = useMemo(() => async (portId: string) => {
+    await fetch(`${CHARGER_URL}/session/${portId}/start`, {
       method: 'POST',
     })
-  }
+  }, [])
 
-  const stopSession = async (portId: string) => {
-    await fetch(`${CHARGER_URL}/ports/${portId}/stop`, {
+  const stopSession = useMemo(() => async (portId: string) => {
+    await fetch(`${CHARGER_URL}/session/${portId}/stop`, {
       method: 'POST',
     })
-  }
+  }, [])
 
-  const updateSession = async (portId: string, sessionId: string, state: ChargeState) => {
-    await fetch(`${CHARGER_URL}/ports/${portId}/sessions/${sessionId}`, {
+  const updateSession = useMemo(() => async (portId: string, state: ChargeState) => {
+    console.log('updateSession', portId, state)
+    await fetch(`${CHARGER_URL}/session/${portId}/state`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ chargeState: state }),
+      body: JSON.stringify({ chargeState: state })
     })
-  }
+  }, [])
 
   if (!charger) return <div>Loading...</div>
 

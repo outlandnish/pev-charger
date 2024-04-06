@@ -1,6 +1,7 @@
 import { ChargerPort, Vehicle, useCharger } from '@charger/common'
 import { FC, useState } from 'react'
 import { vehicles } from '../data/vehicles'
+import { ChargeSessionSimulator } from './ChargeSessionSimulator'
 
 interface Props {
   port: ChargerPort
@@ -37,6 +38,12 @@ export const PortListView: FC<Props> = ({ port, index }) => {
         </button>
       )}
       {port.vehicle && <p>Connected - {port.vehicle.name}</p>}
+      {port.chargeSession && (
+        <ChargeSessionSimulator
+          chargeSession={port.chargeSession}
+          portId={port.id}
+        />
+      )}
       {port.vehicle && (
         <button onClick={() => disconnect(port.id)}>Disconnect</button>
       )}

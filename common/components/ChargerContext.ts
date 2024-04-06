@@ -8,7 +8,7 @@ interface ChargeContextType {
   disconnect: (portId: string) => void
   startSession: (portId: string) => void
   stopSession: (portId: string) => void
-  updateSession: (portId: string, sessionId: string, state: ChargeState) => void
+  updateSession: (portId: string, state: ChargeState) => void
 }
 
 export const ChargeContext = createContext({} as ChargeContextType)
