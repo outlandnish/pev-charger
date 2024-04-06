@@ -11,6 +11,7 @@ export const charger: Charger = {
   name: CHARGER_NAME || 'Test charger',
   id: CHARGER_ID || '1234567-890a-bcde-f012-34567890abcd',
   capacity: mainsVoltage * mainsCurrent,
+  availableCapacity: mainsVoltage * mainsCurrent,
   ports: [
     {
       id: 'c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd',
@@ -29,4 +30,51 @@ export const charger: Charger = {
       available: true
     }
   ]
+}
+
+const getMaxPowerRate = (capacity: number, rates: Array<number>, voltage: number) => {
+  for (let i = rates.length - 1; i >= 0; i--) {
+    if (rates[i] * voltage <= capacity) {
+      return rates[i]
+    }
+  }
+  return null
+}
+
+export const updateChargeSessions = () => {
+  let capacity = charger.capacity
+
+  // Charge sessions started earlier get priority on charge rates
+  const activeSessions = charger.ports
+    .filter((port) => port.chargeSession)
+  
+  // For each active session, calculate the maximum power rate that can be supported
+  activeSessions
+    .sort((a, b) => a.chargeSession.startTime.getTime() - b.chargeSession.startTime.getTime())
+    .forEach((port) => {
+      if (port.chargeSession) {
+        switch (port.chargeSession.chargeState) {
+          case 'charge':
+            const chargeRate = getMaxPowerRate(capacity, port.vehicle.supportedChargeCurrent, port.vehicle.voltage)
+            if (chargeRate) {
+              capacity -= port.vehicle.supportedChargeCurrent[0] * port.vehicle.voltage
+              port.chargeSession.fault = null
+            }
+            else 
+              port.chargeSession.fault = 'unavailable'
+            break
+          case 'balance':
+            const balanceRate = getMaxPowerRate(capacity, port.vehicle.supportedBalanceCurrent, port.vehicle.voltage)
+            if (balanceRate) {
+              capacity -= port.vehicle.supportedBalanceCurrent[0] * port.vehicle.voltage
+              port.chargeSession.fault = null
+            }
+            else 
+              port.chargeSession.fault = 'unavailable'
+            break
+        }
+      }
+    })
+
+  charger.availableCapacity = activeSessions.length > 0 ? capacity : charger.capacity
 }

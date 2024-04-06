@@ -1,7 +1,12 @@
+import { useEffect } from 'react'
 import { useCharger } from '../hooks/useCharger'
 
 export const ChargerView = () => {
-  const charger = useCharger()
+  const { charger, refresh: refreshCharger } = useCharger()
+  
+  useEffect(() => {
+    setInterval(() => refreshCharger(), 500)
+  })
 
   return (
     <>

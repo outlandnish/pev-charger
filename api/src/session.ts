@@ -2,10 +2,11 @@ import express, { Request, Response } from 'express'
 import {
   ChargeSession,
   StartSessionRequest,
-  StopSessionRequest
+  StopSessionRequest,
+  UpdateChargeStateRequest
 } from '@charger/common'
-import { findPort, validate } from './utils.js'
-import { charger } from './charger.js'
+import { findPort, validate } from './middleware.js'
+import { charger, updateChargeSessions } from './charger.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const router = express.Router()
@@ -50,9 +51,14 @@ router.post(
     else {
       port.chargeSession.endTime = new Date()
       port.chargeSession.endReason = req.body.reason
+      port.chargeSession.chargeState = 'idle'
+
       const session = port.chargeSession
       sessions.push(session)
       port.chargeSession = undefined
+
+      updateChargeSessions()
+
       return res.json({ session })
     }
   }
@@ -60,12 +66,15 @@ router.post(
 
 router.post(
   '/:portId/state',
+  validate(UpdateChargeStateRequest),
   findPort(charger.ports),
   (req: Request, res: Response) => {
     const { port } = req
     if (!port) return
 
     port.chargeSession.chargeState = req.body.chargeState
+    updateChargeSessions()
+
     return res.json({ session: port.chargeSession })
   }
 )

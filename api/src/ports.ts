@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import { ConnectRequest, DisconnectRequest } from '@charger/common'
-import { findPort, validate } from './utils.js'
+import { findPort, validate } from './middleware.js'
 import { charger } from './charger.js'
 
 const router = express.Router()
@@ -22,6 +22,11 @@ router.post(
     else {
       port.available = false
       port.vehicle = req.body.vehicle
+
+      // sort supported charge and balance currents in descending order
+      port.vehicle.supportedChargeCurrent.sort((a, b) => b - a)
+      port.vehicle.supportedBalanceCurrent.sort((a, b) => b - a)
+
       return res.json({ success: true, port })
     }
   }

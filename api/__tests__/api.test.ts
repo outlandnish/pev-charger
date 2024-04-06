@@ -10,6 +10,7 @@ describe('Test app.ts', () => {
       name: 'Test charger',
       id: '1234567-890a-bcde-f012-34567890abcd',
       capacity: 2400,
+      availableCapacity: 2400,
       ports: [
         {
           id: 'c9e05f1c-f4ea-4b05-8b50-5016ec5f8dcd',

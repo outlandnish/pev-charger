@@ -14,7 +14,8 @@ const onewheelPint: Vehicle = {
   stateOfCharge: 50,
   chargeState: 'charge',
   capacity: 144,
-  voltage: 63
+  voltage: 63,
+  batteryType: 'lithium-ion'
 }
 
 describe('Port api', () => {

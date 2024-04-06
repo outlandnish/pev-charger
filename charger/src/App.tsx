@@ -1,4 +1,3 @@
-import './App.css'
 import { ChargerProvider } from './components/ChargerProvider'
 import { ChargerView } from './components/ChargerView'
 
