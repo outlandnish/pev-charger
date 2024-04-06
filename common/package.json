@@ -6,5 +6,17 @@
   "type": "module",
   "dependencies": {
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "lint": "echo \"no lint script\"",
+    "lint:fix": "echo \"no lint:fix script\"",
+    "ci": "echo \"no ci script\""
   }
 }
