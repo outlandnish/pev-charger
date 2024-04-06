@@ -32,7 +32,11 @@ export const charger: Charger = {
   ]
 }
 
-const getMaxPowerRate = (capacity: number, rates: Array<number>, voltage: number) => {
+const getMaxPowerRate = (
+  capacity: number,
+  rates: Array<number>,
+  voltage: number
+) => {
   for (let i = rates.length - 1; i >= 0; i--) {
     if (rates[i] * voltage <= capacity) {
       return rates[i]
@@ -45,36 +49,47 @@ export const updateChargeSessions = () => {
   let capacity = charger.capacity
 
   // Charge sessions started earlier get priority on charge rates
-  const activeSessions = charger.ports
-    .filter((port) => port.chargeSession)
-  
+  const activeSessions = charger.ports.filter((port) => port.chargeSession)
+
   // For each active session, calculate the maximum power rate that can be supported
   activeSessions
-    .sort((a, b) => a.chargeSession.startTime.getTime() - b.chargeSession.startTime.getTime())
+    .sort(
+      (a, b) =>
+        a.chargeSession.startTime.getTime() -
+        b.chargeSession.startTime.getTime()
+    )
     .forEach((port) => {
       if (port.chargeSession) {
+        let powerRate = null
         switch (port.chargeSession.chargeState) {
           case 'charge':
-            const chargeRate = getMaxPowerRate(capacity, port.vehicle.supportedChargeCurrent, port.vehicle.voltage)
-            if (chargeRate) {
-              capacity -= port.vehicle.supportedChargeCurrent[0] * port.vehicle.voltage
+            powerRate = getMaxPowerRate(
+              capacity,
+              port.vehicle.supportedChargeCurrent,
+              port.vehicle.voltage
+            )
+            if (powerRate) {
+              capacity -=
+                port.vehicle.supportedChargeCurrent[0] * port.vehicle.voltage
               port.chargeSession.fault = null
-            }
-            else 
-              port.chargeSession.fault = 'unavailable'
+            } else port.chargeSession.fault = 'unavailable'
             break
           case 'balance':
-            const balanceRate = getMaxPowerRate(capacity, port.vehicle.supportedBalanceCurrent, port.vehicle.voltage)
-            if (balanceRate) {
-              capacity -= port.vehicle.supportedBalanceCurrent[0] * port.vehicle.voltage
+            powerRate = getMaxPowerRate(
+              capacity,
+              port.vehicle.supportedBalanceCurrent,
+              port.vehicle.voltage
+            )
+            if (powerRate) {
+              capacity -=
+                port.vehicle.supportedBalanceCurrent[0] * port.vehicle.voltage
               port.chargeSession.fault = null
-            }
-            else 
-              port.chargeSession.fault = 'unavailable'
+            } else port.chargeSession.fault = 'unavailable'
             break
         }
       }
     })
 
-  charger.availableCapacity = activeSessions.length > 0 ? capacity : charger.capacity
+  charger.availableCapacity =
+    activeSessions.length > 0 ? capacity : charger.capacity
 }

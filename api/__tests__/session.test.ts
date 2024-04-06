@@ -51,12 +51,11 @@ describe('Session API', () => {
 
     expect(res.status).toBe(200)
     expect(res.body.session.chargeState).toBe('charge')
-    
-    const chargerRes = await request(app)
-      .get('/')
-    
+
+    const chargerRes = await request(app).get('/')
+
     expect(chargerRes.status).toBe(200)
-    expect(chargerRes.body.availableCapacity).toBe(2400 - (3 * 63))
+    expect(chargerRes.body.availableCapacity).toBe(2400 - 3 * 63)
   })
 
   test('Start balancing', async () => {
@@ -66,12 +65,11 @@ describe('Session API', () => {
 
     expect(res.status).toBe(200)
     expect(res.body.session.chargeState).toBe('balance')
-    
-    const chargerRes = await request(app)
-      .get('/')
-    
+
+    const chargerRes = await request(app).get('/')
+
     expect(chargerRes.status).toBe(200)
-    expect(chargerRes.body.availableCapacity).toBe(2400 - (0.5 * 63))
+    expect(chargerRes.body.availableCapacity).toBe(2400 - 0.5 * 63)
   })
 
   test('Stop session', async () => {
