@@ -3,13 +3,11 @@ import { FC } from 'react'
 
 interface Props {
   portId: string
-  sessionId: string
   chargeSession: ChargeSession
 }
 
 export const ChargeSessionSimulator: FC<Props> = ({
   portId,
-  sessionId,
   chargeSession
 }) => {
   const { updateSession } = useCharger()

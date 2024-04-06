@@ -11,7 +11,7 @@ export const ChargerView = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [refreshCharger])
 
   return (
     <div className="container mx-auto">
