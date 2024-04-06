@@ -15,8 +15,8 @@
     "prettier": "^3.2.5"
   },
   "scripts": {
-    "lint": "",
-    "lint:fix": "",
-    "ci": ""
+    "lint": "echo \"no lint script\"",
+    "lint:fix": "echo \"no lint:fix script\"",
+    "ci": "echo \"no ci script\""
   }
 }
