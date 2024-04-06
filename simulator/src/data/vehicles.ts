@@ -1,4 +1,4 @@
-import { Vehicle } from "@charger/common";
+import { Vehicle } from '@charger/common'
 
 export const vehicles: Vehicle[] = [
   {
@@ -12,7 +12,7 @@ export const vehicles: Vehicle[] = [
     capacity: 148,
     voltage: 63,
     batteryType: 'lithium-ion'
-  }, 
+  },
   {
     id: '49f10e83-07d2-4e40-8943-30534466e098',
     name: 'Onewheel XR',
@@ -48,5 +48,5 @@ export const vehicles: Vehicle[] = [
     capacity: 437,
     voltage: 113,
     batteryType: 'lithium-ion'
-  },
+  }
 ]

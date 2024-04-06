@@ -17,9 +17,7 @@ export const ChargerView = () => {
       <ul>
         {charger.ports.map((port) => (
           <li key={port.id}>
-            <div>
-              
-            </div>
+            <div></div>
           </li>
         ))}
       </ul>
